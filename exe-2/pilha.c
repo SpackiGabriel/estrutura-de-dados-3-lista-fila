@@ -12,7 +12,7 @@ Pilha* criar_pilha() {
 
 
 int empilhar(Pilha* pilha, int valor) {
-    Elemento* novo = (Elemento*) malloc(sizeof(Elemento));
+    ElementoPilha* novo = (ElementoPilha*) malloc(sizeof(ElementoPilha));
     novo->valor = valor;
 
     novo->proximo = pilha->topo;
@@ -22,7 +22,7 @@ int empilhar(Pilha* pilha, int valor) {
 }
 
 int desempilhar(Pilha* pilha) {
-    Elemento* aux = pilha->topo;
+    ElementoPilha* aux = pilha->topo;
     pilha->topo = pilha->topo->proximo;
 
     int valor = aux->valor;
@@ -31,7 +31,7 @@ int desempilhar(Pilha* pilha) {
 }
 
 void imprimir_pilha(Pilha* pilha) {
-    Elemento* aux = pilha->topo;
+    ElementoPilha* aux = pilha->topo;
 
     while(aux != NULL) {
         printf("%d\n", aux->valor);
@@ -41,10 +41,10 @@ void imprimir_pilha(Pilha* pilha) {
 
 
 void liberar_pilha(Pilha* pilha) {
-    Elemento* atual = pilha->topo;
+    ElementoPilha* atual = pilha->topo;
 
     while (atual != NULL) {
-        Elemento* aux = atual;
+        ElementoPilha* aux = atual;
         atual = atual->proximo;
         free(aux);
     }

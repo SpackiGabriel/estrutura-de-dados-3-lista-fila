@@ -1,10 +1,10 @@
-typedef struct Elemento {
+typedef struct ElementoPilha {
     int valor;
-    struct Elemento* proximo;
-} Elemento;
+    struct ElementoPilha* proximo;
+} ElementoPilha;
 
 typedef struct Pilha {
-    Elemento* topo;
+    ElementoPilha* topo;
 } Pilha;
 
 
