@@ -6,6 +6,7 @@ struct aluno{
 };
 
 typedef struct fila Fila;
+typedef struct super_fila SuperFila;
 
 Fila* cria_Fila();
 void libera_Fila(Fila* fi);
@@ -16,3 +17,8 @@ int tamanho_Fila(Fila* fi);
 int Fila_vazia(Fila* fi);
 int Fila_cheia(Fila* fi);
 void imprime_Fila(Fila* fi);
+
+SuperFila* cria_SuperFila();
+int insere_SuperFila(SuperFila* sf, Fila* fi);
+int remover_SuperFila(SuperFila *sf);
+void imprimir_SuperFila(SuperFila *sf);

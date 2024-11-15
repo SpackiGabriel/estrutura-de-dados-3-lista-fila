@@ -12,6 +12,13 @@ struct fila {
     struct elemento *inicio;
     struct elemento *final;
     int qtd;
+    struct fila *prox;
+};
+
+struct super_fila {
+    struct fila *inicio;
+    struct fila *final;
+    int qtd;
 };
 
 Fila* cria_Fila(){
@@ -106,5 +113,80 @@ void imprime_Fila(Fila* fi){
                                    no->dados.n3);
         printf("-------------------------------\n");
         no = no->prox;
+    }
+}
+
+SuperFila* cria_SuperFila() {
+    SuperFila* sf = (SuperFila*) malloc(sizeof(SuperFila));
+    if (sf != NULL) {
+        sf->inicio = NULL;
+        sf->final = NULL;
+        sf->qtd = 0;
+    }
+    return sf;
+}
+
+int insere_SuperFila(SuperFila* sf, Fila* fi) {
+    if (sf == NULL || fi == NULL) return 0;
+
+    fi->prox = NULL;
+
+    if (sf->inicio == NULL) {
+        sf->inicio = fi;
+    } else {
+        sf->final->prox = fi;
+    }
+
+    sf->final = fi;
+    sf->qtd++;
+
+    return 1;
+}
+
+int remover_SuperFila(SuperFila *sf) {
+    if (sf == NULL || sf->inicio == NULL) return 0;
+
+    Fila* fi = sf->inicio;
+    sf->inicio = sf->inicio->prox;
+
+    if (sf->inicio == NULL) {
+        sf->final = NULL;
+    }
+
+    free(fi);
+    sf->qtd--;
+
+    return 1;
+}
+
+void imprimir_SuperFila(SuperFila *sf) {
+    if (sf == NULL || sf->inicio == NULL) {
+        printf("SuperFila vazia.\n");
+        return;
+    }
+
+    Fila* at = sf->inicio;
+    int count = 1;
+
+    while (at != NULL) {
+        printf("Fila %d:\n", count);
+        struct elemento *elem_atual = at->inicio;
+        
+        if (elem_atual == NULL) {
+            printf("  [Fila vazia]\n");
+        }
+
+        while (elem_atual != NULL) {
+            printf("  Matricula: %d, Nome: %s, Notas: %.2f, %.2f, %.2f\n",
+                   elem_atual->dados.matricula,
+                   elem_atual->dados.nome,
+                   elem_atual->dados.n1,
+                   elem_atual->dados.n2,
+                   elem_atual->dados.n3);
+            elem_atual = elem_atual->prox;
+        }
+
+        at = at->prox;
+        count++;
     }
 }
